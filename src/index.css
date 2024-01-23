@@ -1,3 +1,90 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.App {
+  @apply px-4 py-2 flex flex-row bg-slate-100;
+}
+
+#sidebar {
+  @apply flex flex-col justify-between items-center border-r border-slate-300;
+}
+
+.sidebarIcon {
+  @apply pr-3 cursor-pointer hover:scale-110 transition ease-in-out duration-100;
+}
+
+header {
+  @apply flex flex-row justify-between items-center p-2 border-b border-slate-300;
+}
+
+.searchBar {
+  @apply flex flex-row items-center gap-3 px-2 py-1 border border-slate-400 rounded-full;
+}
+
+.dateGrp,
+.profileGrp {
+  @apply flex flex-row items-center gap-2;
+}
+
+.profileGrp {
+  @apply border border-slate-400 rounded-full px-2 py-2;
+}
+
+.sectionHeading {
+  @apply font-semibold text-lg;
+}
+
+.salesTrends,
+.lastOrders {
+  @apply flex flex-col lg:flex-row gap-5;
+}
+
+.salesGraph,
+.lastOrdersTable {
+  @apply p-2 rounded-lg bg-white w-full lg:w-2/3;
+}
+
+.salesChartGrp {
+  @apply w-full lg:w-1/3 grid grid-cols-2 gap-5;
+}
+
+.salesChartBody {
+  @apply p-2 rounded-lg bg-white text-sm;
+}
+
+.subHeading {
+  @apply text-slate-500 mt-2;
+}
+
+.totalNumber {
+  @apply font-semibold text-lg;
+}
+
+.trendingUpText {
+  @apply text-green-500 text-xs;
+}
+
+.trendingDownText {
+  @apply text-red-500 text-xs;
+}
+
+.lastOrdersGrp {
+  @apply flex flex-row pt-5;
+}
+
+.lastOrdersColumn {
+  @apply flex flex-col items-start gap-3;
+}
+
+.columnNameGrp {
+  @apply flex flex-row items-center gap-2 py-2 border-t border-t-slate-400;
+}
+
+.columnHeading {
+  @apply text-slate-400;
+}
+
+.topPlatforms {
+  @apply lg:w-1/3 bg-white p-2 rounded-lg;
+}
