@@ -2,7 +2,18 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
+      },
+      colors: {
+        bookBazaar: "#6160DC",
+        artisanAisle: "#54C5EB",
+        toyTroop: "#FFB74A",
+        xStore: "#FF4A55",
+        hoverHighlight: "#34CAA5",
+      },
+    },
   },
   plugins: [],
 };

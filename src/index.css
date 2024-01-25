@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .App {
-  @apply px-4 py-2 flex flex-row bg-slate-100;
+  @apply px-4 py-2 flex flex-row bg-slate-100 font-jakarta;
 }
 
 #sidebar {
@@ -28,7 +30,19 @@ header {
 }
 
 .profileGrp {
-  @apply border border-slate-400 rounded-full px-2 py-2;
+  @apply border border-slate-400 rounded-full px-3 py-2 text-xs;
+}
+
+.selectProfile {
+  @apply absolute right-0 w-20 text-center  rounded-lg flex flex-col  bg-white opacity-80;
+}
+
+.hideProfileMenu {
+  @apply h-0 overflow-hidden;
+}
+
+.selectName {
+  @apply text-sm cursor-pointer px-4 py-2 hover:bg-slate-100 hover:scale-110 transition ease-in-out duration-100;
 }
 
 .sectionHeading {
@@ -42,11 +56,15 @@ header {
 
 .salesGraph,
 .lastOrdersTable {
-  @apply p-2 rounded-lg bg-white w-full lg:w-2/3;
+  @apply p-3 rounded-lg bg-white w-full lg:w-2/3;
 }
 
 .salesChartGrp {
   @apply w-full lg:w-1/3 grid grid-cols-2 gap-5;
+}
+
+.sortingGrp {
+  @apply flex flex-row items-center gap-3;
 }
 
 .salesChartBody {
@@ -61,6 +79,10 @@ header {
   @apply font-semibold text-lg;
 }
 
+.trendingNumGrp {
+  @apply flex flex-row items-center gap-1  py-0.5 rounded-full;
+}
+
 .trendingUpText {
   @apply text-green-500 text-xs;
 }
@@ -69,22 +91,50 @@ header {
   @apply text-red-500 text-xs;
 }
 
-.lastOrdersGrp {
-  @apply flex flex-row pt-5;
+.lastOrdersTableGrp {
+  @apply w-full mt-5;
 }
 
-.lastOrdersColumn {
-  @apply flex flex-col items-start gap-3;
+th {
+  @apply text-slate-400 text-start;
+}
+
+tbody {
+  @apply text-sm;
 }
 
 .columnNameGrp {
-  @apply flex flex-row items-center gap-2 py-2 border-t border-t-slate-400;
+  @apply flex flex-row items-center gap-2 py-2;
 }
 
 .columnHeading {
   @apply text-slate-400;
 }
 
+.invoiceGrp {
+  @apply flex flex-row items-center gap-2;
+}
+
 .topPlatforms {
-  @apply lg:w-1/3 bg-white p-2 rounded-lg;
+  @apply lg:w-1/3 bg-white p-3 rounded-lg;
+}
+
+.platformItem {
+  @apply text-sm;
+}
+
+.platformName {
+  @apply font-semibold;
+}
+
+.ratingBar {
+  @apply rounded-full bg-slate-100 my-2;
+}
+
+.barColor {
+  @apply p-1 rounded-full;
+}
+
+.platformMoneyGrp {
+  @apply flex flex-row justify-between items-center text-slate-400;
 }
