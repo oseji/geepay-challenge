@@ -19,6 +19,7 @@ import boxIcon from "./assets/box icon.svg";
 import percentageIcon from "./assets/percentage icon.svg";
 import cautionIcon from "./assets/caution icon.svg";
 import sunIcon from "./assets/sun icon.svg";
+import sunnnn from "./assets/sunnn.svg";
 import moonIcon from "./assets/moon icon.svg";
 import leftArrowIcon from "./assets/arrow left icon.svg";
 import rightArrowIcon from "./assets/arrow right icon.svg";
@@ -26,6 +27,7 @@ import settingsIcon from "./assets/settings icon.svg";
 
 import searchIcon from "./assets/search icon.svg";
 import calendarIcon from "./assets/calendar icon.svg";
+import bellIcon from "./assets/bell.svg";
 import downIcon from "./assets/down arrow icon.svg";
 
 import justinBergson from "./assets/justin bergson.png";
@@ -187,6 +189,11 @@ function App() {
     sidebar.classList.toggle("hideSidebar");
   };
 
+  const toggleThemeBtn = () => {
+    setIsThemeToggled(!isThemeToggled);
+    console.log(isThemeToggled);
+  };
+
   const sideBarIconRefs = [
     useRef(null),
     useRef(null),
@@ -198,11 +205,11 @@ function App() {
     useRef(null),
   ];
 
-  useEffect(() => {
-    sideBarIconRefs.forEach((ref) => {
-      console.log(ref.current);
-    });
-  }, []);
+  // useEffect(() => {
+  //   sideBarIconRefs.forEach((ref) => {
+  //     console.log(ref.current);
+  //   });
+  // }, []);
 
   return (
     <div className="App">
@@ -249,7 +256,8 @@ function App() {
 
           <div className="flex flex-col items-center gap-2 bg-white py-2 px-1 my-5 lg:my-0 rounded-full">
             <img
-              src={sunIcon}
+              onClick={toggleThemeBtn}
+              src={sunnnn}
               alt="sunIcon"
               className="cursor-pointer  hover:scale-125 transition ease-in-out duration-200"
             />
@@ -278,7 +286,7 @@ function App() {
         </div>
       </div>
 
-      <main className="w-full p-2">
+      <main className="w-full p-4 lg:p-2">
         <header>
           <div className="w-full lg:w-auto flex flex-row justify-between items-center">
             <h1 className="font-semibold text-lg mr-auto">Dashboard</h1>
@@ -309,6 +317,7 @@ function App() {
               <p>
                 {month} {day}, {year}
               </p>
+              <img src={bellIcon} alt="bellIcon" />
             </div>
 
             <div className="profileGrp">
@@ -383,7 +392,7 @@ function App() {
                 <div className="sortingGrp">
                   <p>Sort by:</p>
 
-                  <select className="border border-slate-950 rounded-full px-3 py-1 cursor-pointer text-sm outline-0">
+                  <select className="bg-white border border-slate-950 rounded-full px-3 py-1 cursor-pointer text-sm outline-0">
                     <option value="weekly">Weekly</option>
                     <option value="weekly">Monthly</option>
                   </select>

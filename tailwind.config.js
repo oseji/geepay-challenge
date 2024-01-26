@@ -12,6 +12,8 @@ export default {
         toyTroop: "#FFB74A",
         xStore: "#FF4A55",
         hoverHighlight: "#34CAA5",
+        appBG: "#FAFAFA",
+        appBorders: "#E5EAEF",
       },
       width: {
         "6/10": "60%",
