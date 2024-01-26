@@ -16,6 +16,8 @@ export default {
       width: {
         "6/10": "60%",
         "4/10": "40%",
+
+        mobileTable: "500px",
       },
     },
   },

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -187,36 +187,76 @@ function App() {
     sidebar.classList.toggle("hideSidebar");
   };
 
+  const sideBarIconRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
+
+  useEffect(() => {
+    sideBarIconRefs.forEach((ref) => {
+      console.log(ref.current);
+    });
+  }, []);
+
   return (
     <div className="App">
       <div id="sidebar" className="hideSidebar" ref={sideBarRef}>
         <div className="flex flex-col  items-center gap-2 mt-9 lg:mt-3">
-          <img src={logoIcon} alt="logoIcon" className="sidebarIcon" />
+          <img src={logoIcon} alt="logoIcon" className="logo" />
+
           <img
             src={squareMenuIcon}
             alt="squareMenuIcon"
             className="sidebarIcon"
+            ref={sideBarIconRefs[0]}
           />
-          <img src={salesIcon} alt="salesIcon" className="sidebarIcon" />
-          <img src={peopleIcon} alt="peopleIcon" className="sidebarIcon" />
-          <img src={boxIcon} alt="boxIcon" className="sidebarIcon" />
+          <img
+            src={salesIcon}
+            alt="salesIcon"
+            className="sidebarIcon"
+            ref={sideBarIconRefs[1]}
+          />
+          <img
+            src={peopleIcon}
+            alt="peopleIcon"
+            className="sidebarIcon"
+            ref={sideBarIconRefs[2]}
+          />
+          <img
+            src={boxIcon}
+            alt="boxIcon"
+            className="sidebarIcon"
+            ref={sideBarIconRefs[3]}
+          />
           <img
             src={percentageIcon}
             alt="percentageIcon"
             className="sidebarIcon"
+            ref={sideBarIconRefs[4]}
           />
-          <img src={cautionIcon} alt="cautionIcon" className="sidebarIcon" />
+          <img
+            src={cautionIcon}
+            alt="cautionIcon"
+            className="sidebarIcon"
+            ref={sideBarIconRefs[5]}
+          />
 
           <div className="flex flex-col items-center gap-2 bg-white py-2 px-1 my-5 lg:my-0 rounded-full">
             <img
               src={sunIcon}
               alt="sunIcon"
-              className="cursor-pointer  hover:scale-110 transition ease-in-out duration-200"
+              className="cursor-pointer  hover:scale-125 transition ease-in-out duration-200"
             />
             <img
               src={moonIcon}
               alt="moonIcon"
-              className="cursor-pointer  hover:scale-110 transition ease-in-out duration-200"
+              className="cursor-pointer  hover:scale-125 transition ease-in-out duration-200"
             />
           </div>
         </div>
@@ -226,12 +266,14 @@ function App() {
             src={leftArrowIcon}
             alt="leftArrowIcon"
             className="sidebarIcon"
+            ref={sideBarIconRefs[6]}
           />
           <img src={settingsIcon} alt="settingsIcon" className="sidebarIcon" />
           <img
             src={rightArrowIcon}
             alt="rightArrowIcon"
             className="sidebarIcon"
+            ref={sideBarIconRefs[7]}
           />
         </div>
       </div>
@@ -249,7 +291,7 @@ function App() {
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center justify-end gap-5 lg:gap-10 text-sm">
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-end gap-5 lg:gap-10 text-sm">
             <div className="searchAndProfile">
               <div className="searchBar">
                 <img src={searchIcon} alt="searchIcon" />
@@ -348,26 +390,28 @@ function App() {
                 </div>
               </div>
 
-              <BarChart
-                className="w-full mt-5"
-                width={600}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
-              </BarChart>
+              <div className="overflow-x-scroll md:overflow-x-hidden">
+                <BarChart
+                  className="w-full mt-5"
+                  width={600}
+                  height={250}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="pv" fill="#8884d8" />
+                  <Bar dataKey="uv" fill="#82ca9d" />
+                </BarChart>
+              </div>
             </div>
 
             <div className="salesChartGrp">
@@ -465,159 +509,161 @@ function App() {
             <div className="lastOrdersTable">
               <h1 className="sectionHeading">Last Orders</h1>
 
-              <table className="lastOrdersTableGrp">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Invoice</th>
-                  </tr>
-                </thead>
+              <div className="overflow-x-scroll md:overflow-x-hidden">
+                <table className="lastOrdersTableGrp">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Date</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Invoice</th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  <tr>
-                    <td>
-                      <div className="columnNameGrp">
-                        <img src={marcusBergson} alt="avatar" />
-                        <p>Marcus Bergson</p>
-                      </div>
-                    </td>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="columnNameGrp">
+                          <img src={marcusBergson} alt="avatar" />
+                          <p>Marcus Bergson</p>
+                        </div>
+                      </td>
 
-                    <td>
-                      <p>Nov 15, 2023</p>
-                    </td>
+                      <td>
+                        <p>Nov 15, 2023</p>
+                      </td>
 
-                    <td>
-                      <p>$80,000</p>
-                    </td>
+                      <td>
+                        <p>$80,000</p>
+                      </td>
 
-                    <td>
-                      <p className="text-hoverHighlight">Paid</p>
-                    </td>
-                    <td>
-                      <div className="invoiceGrp">
-                        <img src={invoiceIcon} alt="invoiceIcon" />
+                      <td>
+                        <p className="text-hoverHighlight">Paid</p>
+                      </td>
+                      <td>
+                        <div className="invoiceGrp">
+                          <img src={invoiceIcon} alt="invoiceIcon" />
 
-                        <p>View</p>
-                      </div>
-                    </td>
-                  </tr>
+                          <p>View</p>
+                        </div>
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>
-                      <div className="columnNameGrp">
-                        <img src={jadonVarraco} alt="avatar" />
-                        <p>Jaydon Varraco</p>
-                      </div>
-                    </td>
+                    <tr>
+                      <td>
+                        <div className="columnNameGrp">
+                          <img src={jadonVarraco} alt="avatar" />
+                          <p>Jaydon Varraco</p>
+                        </div>
+                      </td>
 
-                    <td>
-                      <p>Nov 15, 2023</p>
-                    </td>
+                      <td>
+                        <p>Nov 15, 2023</p>
+                      </td>
 
-                    <td>
-                      <p>$150,000</p>
-                    </td>
+                      <td>
+                        <p>$150,000</p>
+                      </td>
 
-                    <td>
-                      <p className="text-red-400">Refund</p>
-                    </td>
-                    <td>
-                      <div className="invoiceGrp">
-                        <img src={invoiceIcon} alt="invoiceIcon" />
+                      <td>
+                        <p className="text-red-400">Refund</p>
+                      </td>
+                      <td>
+                        <div className="invoiceGrp">
+                          <img src={invoiceIcon} alt="invoiceIcon" />
 
-                        <p>View</p>
-                      </div>
-                    </td>
-                  </tr>
+                          <p>View</p>
+                        </div>
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>
-                      <div className="columnNameGrp">
-                        <img src={coreySchleifer} alt="avatar" />
-                        <p>Corey Schleifer</p>
-                      </div>
-                    </td>
+                    <tr>
+                      <td>
+                        <div className="columnNameGrp">
+                          <img src={coreySchleifer} alt="avatar" />
+                          <p>Corey Schleifer</p>
+                        </div>
+                      </td>
 
-                    <td>
-                      <p>Nov 14, 2023</p>
-                    </td>
+                      <td>
+                        <p>Nov 14, 2023</p>
+                      </td>
 
-                    <td>
-                      <p>$87,000</p>
-                    </td>
+                      <td>
+                        <p>$87,000</p>
+                      </td>
 
-                    <td>
-                      <p className="text-green-400">Paid</p>
-                    </td>
-                    <td>
-                      <div className="invoiceGrp">
-                        <img src={invoiceIcon} alt="invoiceIcon" />
+                      <td>
+                        <p className="text-green-400">Paid</p>
+                      </td>
+                      <td>
+                        <div className="invoiceGrp">
+                          <img src={invoiceIcon} alt="invoiceIcon" />
 
-                        <p>View</p>
-                      </div>
-                    </td>
-                  </tr>
+                          <p>View</p>
+                        </div>
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>
-                      <div className="columnNameGrp">
-                        <img src={cooperPress} alt="avatar" />
-                        <p>Cooper Press</p>
-                      </div>
-                    </td>
+                    <tr>
+                      <td>
+                        <div className="columnNameGrp">
+                          <img src={cooperPress} alt="avatar" />
+                          <p>Cooper Press</p>
+                        </div>
+                      </td>
 
-                    <td>
-                      <p>Nov 14, 2023</p>
-                    </td>
+                      <td>
+                        <p>Nov 14, 2023</p>
+                      </td>
 
-                    <td>
-                      <p>$100,000</p>
-                    </td>
+                      <td>
+                        <p>$100,000</p>
+                      </td>
 
-                    <td>
-                      <p className="text-red-400">Refund</p>
-                    </td>
-                    <td>
-                      <div className="invoiceGrp">
-                        <img src={invoiceIcon} alt="invoiceIcon" />
+                      <td>
+                        <p className="text-red-400">Refund</p>
+                      </td>
+                      <td>
+                        <div className="invoiceGrp">
+                          <img src={invoiceIcon} alt="invoiceIcon" />
 
-                        <p>View</p>
-                      </div>
-                    </td>
-                  </tr>
+                          <p>View</p>
+                        </div>
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>
-                      <div className="columnNameGrp">
-                        <img src={philipLubin} alt="avatar" />
-                        <p>Philip Lubin</p>
-                      </div>
-                    </td>
+                    <tr>
+                      <td>
+                        <div className="columnNameGrp">
+                          <img src={philipLubin} alt="avatar" />
+                          <p>Philip Lubin</p>
+                        </div>
+                      </td>
 
-                    <td>
-                      <p>Nov 13, 2023</p>
-                    </td>
+                      <td>
+                        <p>Nov 13, 2023</p>
+                      </td>
 
-                    <td>
-                      <p>$78,000</p>
-                    </td>
+                      <td>
+                        <p>$78,000</p>
+                      </td>
 
-                    <td>
-                      <p className="text-text-hoverHighlight">Paid</p>
-                    </td>
-                    <td>
-                      <div className="invoiceGrp">
-                        <img src={invoiceIcon} alt="invoiceIcon" />
+                      <td>
+                        <p className="text-text-hoverHighlight">Paid</p>
+                      </td>
+                      <td>
+                        <div className="invoiceGrp">
+                          <img src={invoiceIcon} alt="invoiceIcon" />
 
-                        <p>View</p>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                          <p>View</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div className="topPlatforms">
@@ -693,10 +739,10 @@ function App() {
 
                   <div className="ratingBar">
                     <motion.div
-                      className="barColor bg-xStore w-1/4"
+                      className="barColor bg-xStore w-2/3"
                       initial={{ width: 0 }}
                       whileInView={{
-                        width: "25%",
+                        width: "66.666667%",
                         transition: { duration: 1 },
                       }}
                     ></motion.div>

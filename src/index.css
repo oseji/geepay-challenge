@@ -16,7 +16,7 @@
 }
 
 .sidebarIcon {
-  @apply px-3 cursor-pointer hover:scale-110 transition ease-in-out duration-100;
+  @apply px-3 cursor-pointer border-r-2 border-r-transparent focus:border-r-hoverHighlight hover:border-r-hoverHighlight hover:scale-125 transition ease-in-out duration-100;
 }
 
 header {
@@ -37,7 +37,7 @@ header {
 }
 
 .selectProfile {
-  @apply absolute right-0 w-20 text-center  rounded-lg flex flex-col  bg-white opacity-80;
+  @apply absolute right-0 w-full lg:w-20 text-center  rounded-lg flex flex-col  bg-white opacity-90 z-10;
 }
 
 .hideProfileMenu {
@@ -63,7 +63,7 @@ header {
 }
 
 .salesChartGrp {
-  @apply w-full flex flex-row items-center  lg:w-4/10 lg:grid grid-cols-2 gap-5 overflow-x-auto;
+  @apply w-full flex-nowrap flex flex-row items-center  lg:w-4/10 lg:grid grid-cols-2 gap-5 overflow-x-auto;
 }
 
 .sortingGrp {
@@ -71,7 +71,7 @@ header {
 }
 
 .salesChartBody {
-  @apply w-full lg:w-auto flex-nowrap flex flex-col justify-between p-2 rounded-lg bg-white text-sm;
+  @apply w-2/3 lg:w-auto flex-none flex flex-col justify-between p-2 rounded-lg bg-white text-sm;
 }
 
 .subHeading {
@@ -95,7 +95,7 @@ header {
 }
 
 .lastOrdersTableGrp {
-  @apply w-full mt-5;
+  @apply w-mobileTable md:w-full mt-5;
 }
 
 th {
