@@ -13,6 +13,10 @@ export default {
         xStore: "#FF4A55",
         hoverHighlight: "#34CAA5",
       },
+      width: {
+        "6/10": "60%",
+        "4/10": "40%",
+      },
     },
   },
   plugins: [],

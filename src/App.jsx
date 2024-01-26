@@ -8,7 +8,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { motion } from "framer-motion";
 
+import mobileMenu from "./assets/mobileMenu.svg";
 import logoIcon from "./assets/logo.svg";
 import squareMenuIcon from "./assets/Square menu.svg";
 import salesIcon from "./assets/sales icon.svg";
@@ -27,6 +29,7 @@ import calendarIcon from "./assets/calendar icon.svg";
 import downIcon from "./assets/down arrow icon.svg";
 
 import justinBergson from "./assets/justin bergson.png";
+import marcusBergson from "./assets/marcus bergson.png";
 import coreySchleifer from "./assets/corey schleifer.png";
 import jadonVarraco from "./assets/jaydon vaccaro.png";
 import cooperPress from "./assets/cooper press.png";
@@ -41,13 +44,28 @@ import invoiceIcon from "./assets/invoice icon.svg";
 
 function App() {
   const [isThemeToggled, setIsThemeToggled] = useState(false);
-
-  const [todaysDate, setTodaysDate] = useState("November ,15 2023");
   const [profileName, setProfileName] = useState(`Justin Bergson`);
   const [profileImg, setProfileImg] = useState(justinBergson);
   const [profileEmail, setProfileEmail] = useState("Justin@gmail.com");
 
-  const profileMenuRef = useRef(null);
+  const currentDate = new Date();
+  const monthNames = [
+    "Janurary",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = monthNames[currentDate.getMonth()];
+  const day = currentDate.getDate();
+  const year = currentDate.getFullYear();
 
   const data = [
     {
@@ -124,14 +142,15 @@ function App() {
     },
   ];
 
+  const profileMenuRef = useRef(null);
   const toggleProfileMenu = () => {
     const profileMenu = profileMenuRef.current;
     profileMenu.classList.toggle("hideProfileMenu");
-    console.log("clicked");
   };
 
   const toggleProfile = (e) => {
     const clicked = e.target.dataset.value;
+    const profileMenu = profileMenuRef.current;
 
     if (clicked === "justin") {
       setProfileName("Justin Bergson");
@@ -158,12 +177,20 @@ function App() {
       setProfileImg(philipLubin);
       setProfileEmail("Philip@gmail.com");
     }
+
+    profileMenu.classList.toggle("hideProfileMenu");
+  };
+
+  const sideBarRef = useRef(null);
+  const toggleSideBar = () => {
+    const sidebar = sideBarRef.current;
+    sidebar.classList.toggle("hideSidebar");
   };
 
   return (
     <div className="App">
-      <div id="sidebar">
-        <div className="flex flex-col  items-center gap-2 mt-3">
+      <div id="sidebar" className="hideSidebar" ref={sideBarRef}>
+        <div className="flex flex-col  items-center gap-2 mt-9 lg:mt-3">
           <img src={logoIcon} alt="logoIcon" className="sidebarIcon" />
           <img
             src={squareMenuIcon}
@@ -180,7 +207,7 @@ function App() {
           />
           <img src={cautionIcon} alt="cautionIcon" className="sidebarIcon" />
 
-          <div className="flex flex-col items-center gap-2 bg-white py-2 mr-3 px-1 rounded-full">
+          <div className="flex flex-col items-center gap-2 bg-white py-2 px-1 my-5 lg:my-0 rounded-full">
             <img
               src={sunIcon}
               alt="sunIcon"
@@ -211,9 +238,18 @@ function App() {
 
       <main className="w-full p-2">
         <header>
-          <h1 className="font-semibold text-lg">Dashboard</h1>
+          <div className="w-full lg:w-auto flex flex-row justify-between items-center">
+            <h1 className="font-semibold text-lg mr-auto">Dashboard</h1>
 
-          <div className="flex flex-row items-center justify-end gap-10 text-sm">
+            <img
+              src={mobileMenu}
+              alt="mobileMenu"
+              onClick={toggleSideBar}
+              className="lg:hidden"
+            />
+          </div>
+
+          <div className="flex flex-col lg:flex-row items-center justify-end gap-5 lg:gap-10 text-sm">
             <div className="searchAndProfile">
               <div className="searchBar">
                 <img src={searchIcon} alt="searchIcon" />
@@ -228,7 +264,9 @@ function App() {
 
             <div className="dateGrp">
               <img src={calendarIcon} alt="calendarIcon" />
-              <p>{todaysDate}</p>
+              <p>
+                {month} {day}, {year}
+              </p>
             </div>
 
             <div className="profileGrp">
@@ -312,7 +350,7 @@ function App() {
 
               <BarChart
                 className="w-full mt-5"
-                width={700}
+                width={600}
                 height={300}
                 data={data}
                 margin={{
@@ -340,8 +378,10 @@ function App() {
                   <img src={chartUp} alt="totalOrdersChart" />
                 </div>
 
-                <h1 className="subHeading">Total Order</h1>
-                <p className="totalNumber">350</p>
+                <div>
+                  <h1 className="subHeading">Total Order</h1>
+                  <p className="totalNumber">350</p>
+                </div>
 
                 <div className="flex flex-row justify-between items-center ">
                   <div className="trendingNumGrp bg-green-100">
@@ -349,7 +389,7 @@ function App() {
                     <p className="trendingUpText">%23.5</p>
                   </div>
 
-                  <p className="text-xs">vs. previous month</p>
+                  <p className="text-sm text-slate-500">vs. previous month</p>
                 </div>
               </div>
 
@@ -360,8 +400,10 @@ function App() {
                   <img src={chartDown} alt="totalOrdersChart" />
                 </div>
 
-                <h1 className="subHeading">Total Refund</h1>
-                <p className="totalNumber">270</p>
+                <div>
+                  <h1 className="subHeading">Total Refund</h1>
+                  <p className="totalNumber">270</p>
+                </div>
 
                 <div className="flex flex-row justify-between items-center">
                   <div className="trendingNumGrp bg-red-100">
@@ -369,7 +411,7 @@ function App() {
                     <p className="trendingDownText">%23.5</p>
                   </div>
 
-                  <p className="text-xs">vs. previous month</p>
+                  <p className="text-sm text-slate-500">vs. previous month</p>
                 </div>
               </div>
 
@@ -380,8 +422,10 @@ function App() {
                   <img src={chartDown} alt="totalOrdersChart" />
                 </div>
 
-                <h1 className="subHeading">Average Sales</h1>
-                <p className="totalNumber">1567</p>
+                <div>
+                  <h1 className="subHeading">Average Sales</h1>
+                  <p className="totalNumber">1567</p>
+                </div>
 
                 <div className="flex flex-row justify-between items-center">
                   <div className="trendingNumGrp bg-red-100">
@@ -389,7 +433,7 @@ function App() {
                     <p className="trendingDownText">%23.5</p>
                   </div>
 
-                  <p className="text-xs">vs. previous month</p>
+                  <p className="text-sm text-slate-500">vs. previous month</p>
                 </div>
               </div>
 
@@ -400,8 +444,10 @@ function App() {
                   <img src={chartUp} alt="totalOrdersChart" />
                 </div>
 
-                <h1 className="subHeading">Total Income</h1>
-                <p className="totalNumber">$350.00</p>
+                <div>
+                  <h1 className="subHeading">Total Income</h1>
+                  <p className="totalNumber">$350.00</p>
+                </div>
 
                 <div className="flex flex-row justify-between items-center">
                   <div className="trendingNumGrp bg-green-100">
@@ -409,7 +455,7 @@ function App() {
                     <p className="trendingUpText">%23.5</p>
                   </div>
 
-                  <p className="text-xs">vs. previous month</p>
+                  <p className="text-sm text-slate-500">vs. previous month</p>
                 </div>
               </div>
             </div>
@@ -434,8 +480,8 @@ function App() {
                   <tr>
                     <td>
                       <div className="columnNameGrp">
-                        <img src={justinBergson} alt="avatar" />
-                        <p>Justin Bergson</p>
+                        <img src={marcusBergson} alt="avatar" />
+                        <p>Marcus Bergson</p>
                       </div>
                     </td>
 
@@ -585,7 +631,14 @@ function App() {
                   <h1 className="platformName">Book Bazaar</h1>
 
                   <div className="ratingBar">
-                    <div className="barColor bg-bookBazaar w-2/3"></div>
+                    <motion.div
+                      className="barColor bg-bookBazaar w-2/3"
+                      initial={{ width: 0 }}
+                      whileInView={{
+                        width: "66.666667%",
+                        transition: { duration: 1 },
+                      }}
+                    ></motion.div>
                   </div>
 
                   <div className="platformMoneyGrp">
@@ -599,7 +652,14 @@ function App() {
                   <h1 className="platformName">Artisan Aisle</h1>
 
                   <div className="ratingBar">
-                    <div className="barColor bg-artisanAisle w-1/2"></div>
+                    <motion.div
+                      className="barColor bg-artisanAisle w-1/2"
+                      initial={{ width: 0 }}
+                      whileInView={{
+                        width: "50%",
+                        transition: { duration: 1 },
+                      }}
+                    ></motion.div>
                   </div>
 
                   <div className="platformMoneyGrp">
@@ -612,7 +672,14 @@ function App() {
                   <h1 className="platformName">Toy Troop</h1>
 
                   <div className="ratingBar">
-                    <div className="barColor bg-toyTroop w-1/3"></div>
+                    <motion.div
+                      className="barColor bg-toyTroop w-1/3"
+                      initial={{ width: 0 }}
+                      whileInView={{
+                        width: "33.333333%",
+                        transition: { duration: 1 },
+                      }}
+                    ></motion.div>
                   </div>
 
                   <div className="platformMoneyGrp">
@@ -625,7 +692,14 @@ function App() {
                   <h1 className="platformName">X Store</h1>
 
                   <div className="ratingBar">
-                    <div className="barColor bg-xStore w-1/4"></div>
+                    <motion.div
+                      className="barColor bg-xStore w-1/4"
+                      initial={{ width: 0 }}
+                      whileInView={{
+                        width: "25%",
+                        transition: { duration: 1 },
+                      }}
+                    ></motion.div>
                   </div>
 
                   <div className="platformMoneyGrp">
