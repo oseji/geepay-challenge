@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import {
   BarChart,
   Bar,
@@ -18,7 +18,6 @@ import peopleIcon from "./assets/people icon.svg";
 import boxIcon from "./assets/box icon.svg";
 import percentageIcon from "./assets/percentage icon.svg";
 import cautionIcon from "./assets/caution icon.svg";
-import sunIcon from "./assets/sun icon.svg";
 import sunnnn from "./assets/sunnn.svg";
 import moonIcon from "./assets/moon icon.svg";
 import leftArrowIcon from "./assets/arrow left icon.svg";
@@ -72,75 +71,51 @@ function App() {
   const data = [
     {
       name: "Jan",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      Amount: 6000,
     },
     {
       name: "Feb",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      Amount: 11000,
     },
     {
       name: "Mar",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      Amount: 3000,
     },
     {
       name: "Apr",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      Amount: 27000,
     },
     {
       name: "May",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      Amount: 9000,
     },
     {
       name: "Jun",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      Amount: 45000,
     },
     {
       name: "Jul",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 8000,
     },
     {
       name: "Aug",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 25000,
     },
     {
       name: "Sept",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 33000,
     },
     {
       name: "Oct",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 4000,
     },
     {
       name: "Nov",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 30000,
     },
     {
       name: "Dec",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      Amount: 26000,
     },
   ];
 
@@ -194,23 +169,6 @@ function App() {
     console.log(isThemeToggled);
   };
 
-  const sideBarIconRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
-
-  // useEffect(() => {
-  //   sideBarIconRefs.forEach((ref) => {
-  //     console.log(ref.current);
-  //   });
-  // }, []);
-
   return (
     <div className="App">
       <div id="sidebar" className="hideSidebar" ref={sideBarRef}>
@@ -221,38 +179,16 @@ function App() {
             src={squareMenuIcon}
             alt="squareMenuIcon"
             className="sidebarIcon"
-            ref={sideBarIconRefs[0]}
           />
-          <img
-            src={salesIcon}
-            alt="salesIcon"
-            className="sidebarIcon"
-            ref={sideBarIconRefs[1]}
-          />
-          <img
-            src={peopleIcon}
-            alt="peopleIcon"
-            className="sidebarIcon"
-            ref={sideBarIconRefs[2]}
-          />
-          <img
-            src={boxIcon}
-            alt="boxIcon"
-            className="sidebarIcon"
-            ref={sideBarIconRefs[3]}
-          />
+          <img src={salesIcon} alt="salesIcon" className="sidebarIcon" />
+          <img src={peopleIcon} alt="peopleIcon" className="sidebarIcon" />
+          <img src={boxIcon} alt="boxIcon" className="sidebarIcon" />
           <img
             src={percentageIcon}
             alt="percentageIcon"
             className="sidebarIcon"
-            ref={sideBarIconRefs[4]}
           />
-          <img
-            src={cautionIcon}
-            alt="cautionIcon"
-            className="sidebarIcon"
-            ref={sideBarIconRefs[5]}
-          />
+          <img src={cautionIcon} alt="cautionIcon" className="sidebarIcon" />
 
           <div className="flex flex-col items-center gap-2 bg-white py-2 px-1 my-5 lg:my-0 rounded-full">
             <img
@@ -274,14 +210,12 @@ function App() {
             src={leftArrowIcon}
             alt="leftArrowIcon"
             className="sidebarIcon"
-            ref={sideBarIconRefs[6]}
           />
           <img src={settingsIcon} alt="settingsIcon" className="sidebarIcon" />
           <img
             src={rightArrowIcon}
             alt="rightArrowIcon"
             className="sidebarIcon"
-            ref={sideBarIconRefs[7]}
           />
         </div>
       </div>
@@ -417,8 +351,12 @@ function App() {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="pv" fill="#8884d8" />
-                  <Bar dataKey="uv" fill="#82ca9d" />
+                  <Bar
+                    dataKey="Amount"
+                    fill="#34CAA5"
+                    opacity={0.2}
+                    activeBar={{ opacity: 1 }}
+                  />
                 </BarChart>
               </div>
             </div>

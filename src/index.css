@@ -20,7 +20,7 @@ html {
 }
 
 .sidebarIcon {
-  @apply px-3 cursor-pointer border-r-2 border-r-transparent focus:border-r-hoverHighlight hover:border-r-hoverHighlight hover:scale-125 transition ease-in-out duration-100;
+  @apply px-3 cursor-pointer border-r-2 border-r-transparent hover:scale-125 transition ease-in-out duration-100;
 }
 
 header {
