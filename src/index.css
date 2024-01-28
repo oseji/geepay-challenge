@@ -9,11 +9,11 @@ html {
 }
 
 .App {
-  @apply flex flex-row bg-appBG font-jakarta;
+  @apply flex flex-row font-jakarta;
 }
 
 #sidebar {
-  @apply h-screen lg:h-auto absolute lg:relative bg-white lg:bg-appBG z-10 lg:flex flex-col lg:gap-40 items-center border-r border-appBorders transition ease-in-out duration-200;
+  @apply h-screen lg:h-auto absolute lg:relative  z-10 lg:flex flex-col lg:gap-40 items-center border-r;
 }
 .hideSidebar {
   @apply -translate-x-32 lg:-translate-x-0;
@@ -24,7 +24,7 @@ html {
 }
 
 header {
-  @apply flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-0 px-2 pb-2 border-b border-appBorders;
+  @apply flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-0 px-2 pb-2 border-b;
 }
 
 .searchBar {
@@ -37,11 +37,11 @@ header {
 }
 
 .profileGrp {
-  @apply border border-appBorders rounded-full px-3 py-2 text-xs;
+  @apply border border-appBorders rounded-full px-3 py-2 text-xs cursor-pointer;
 }
 
 .selectProfile {
-  @apply absolute right-0 w-full lg:w-20 text-center  rounded-lg flex flex-col  bg-white opacity-90 z-10;
+  @apply absolute right-0 w-full  text-center  rounded-lg flex flex-col  bg-white opacity-90 z-10;
 }
 
 .hideProfileMenu {
@@ -63,7 +63,7 @@ header {
 
 .salesGraph,
 .lastOrdersTable {
-  @apply p-3 rounded-lg bg-white w-full lg:w-6/10;
+  @apply p-3 rounded-lg  w-full lg:w-6/10;
 }
 
 .salesChartGrp {
@@ -75,7 +75,7 @@ header {
 }
 
 .salesChartBody {
-  @apply w-2/3 lg:w-auto flex-none flex flex-col justify-between p-2 rounded-lg bg-white text-sm;
+  @apply w-2/3 lg:w-auto flex-none flex flex-col justify-between p-2 rounded-lg text-sm;
 }
 
 .subHeading {
@@ -123,7 +123,10 @@ tbody {
 }
 
 .topPlatforms {
-  @apply lg:w-4/10 bg-white p-3 rounded-lg;
+  @apply lg:w-4/10 p-3 rounded-lg overflow-y-auto  max-h-96;
+}
+.topPlatforms::-webkit-scrollbar {
+  width: 0;
 }
 
 .platformItem {

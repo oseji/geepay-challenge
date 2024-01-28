@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -18,7 +18,7 @@ import peopleIcon from "./assets/people icon.svg";
 import boxIcon from "./assets/box icon.svg";
 import percentageIcon from "./assets/percentage icon.svg";
 import cautionIcon from "./assets/caution icon.svg";
-import sunnnn from "./assets/sunnn.svg";
+import sunnnn from "./assets/sun icon.svg";
 import moonIcon from "./assets/moon icon.svg";
 import leftArrowIcon from "./assets/arrow left icon.svg";
 import rightArrowIcon from "./assets/arrow right icon.svg";
@@ -44,31 +44,7 @@ import trendingDown from "./assets/trending-down.svg";
 import invoiceIcon from "./assets/invoice icon.svg";
 
 function App() {
-  const [isThemeToggled, setIsThemeToggled] = useState(false);
-  const [profileName, setProfileName] = useState(`Justin Bergson`);
-  const [profileImg, setProfileImg] = useState(justinBergson);
-  const [profileEmail, setProfileEmail] = useState("Justin@gmail.com");
-
-  const currentDate = new Date();
-  const monthNames = [
-    "Janurary",
-    "Feburary",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const month = monthNames[currentDate.getMonth()];
-  const day = currentDate.getDate();
-  const year = currentDate.getFullYear();
-
-  const data = [
+  const dataMonthly = [
     {
       name: "Jan",
       Amount: 6000,
@@ -118,8 +94,128 @@ function App() {
       Amount: 26000,
     },
   ];
+  const dataWeekly = [
+    {
+      name: "Mon",
+      Amount: 300,
+    },
+    {
+      name: "Tue",
+      Amount: 700,
+    },
+    {
+      name: "Wed",
+      Amount: 3000,
+    },
+    {
+      name: "Thur",
+      Amount: 500,
+    },
+    {
+      name: "Fri",
+      Amount: 1400,
+    },
+    {
+      name: "Sat",
+      Amount: 2300,
+    },
+    {
+      name: "Sun",
+      Amount: 270,
+    },
+  ];
 
+  const topPlatformItems = [
+    {
+      name: "Book Bazaar",
+      color: "bg-bookBazaar",
+      width: "66.6666%",
+      money: "$2,500,000",
+      percent: "+15%",
+    },
+    {
+      name: "Artisan Aisle",
+      color: "bg-artisanAisle",
+      width: "57%",
+      money: "$1,800,000",
+      percent: "+10%",
+    },
+    {
+      name: "Toy Troop",
+      color: "bg-toyTroop",
+      width: "40%",
+      money: "$1,200,000",
+      percent: "+8%",
+    },
+    {
+      name: "xStore",
+      color: "bg-xStore",
+      width: "66.6666%",
+      money: "$2,500,000",
+      percent: "+11%",
+    },
+    {
+      name: "Food Quest",
+      color: "bg-purple-700",
+      width: "33.3333%",
+      money: "$1,100,000",
+      percent: "+6%",
+    },
+    {
+      name: "Gamzz",
+      color: "bg-red-800",
+      width: "60%",
+      money: "$2,100,000",
+      percent: "+8%",
+    },
+    {
+      name: "FinanceOR",
+      color: "bg-emerald-800",
+      width: "45%",
+      money: "$1,600,000",
+      percent: "+13%",
+    },
+  ];
+  const filteredPlatforms = topPlatformItems.slice(0, 3);
+
+  const [topPlatformData, setTopPlatformData] = useState(topPlatformItems);
+  const [togglePlatformItems, setTogglePlatformItems] = useState(true);
+
+  const [isThemeToggled, setIsThemeToggled] = useState(false);
+  const [profileName, setProfileName] = useState(`Justin Bergson`);
+  const [profileImg, setProfileImg] = useState(justinBergson);
+  const [profileEmail, setProfileEmail] = useState("Justin@gmail.com");
+  const [barChartData, setBarChartData] = useState(dataMonthly);
+
+  const sideBarRef = useRef(null);
   const profileMenuRef = useRef(null);
+
+  const currentDate = new Date();
+  const monthNames = [
+    "Janurary",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = monthNames[currentDate.getMonth()];
+  const day = currentDate.getDate();
+  const year = currentDate.getFullYear();
+
+  //toggle platform items
+  useEffect(() => {
+    togglePlatformItems
+      ? setTopPlatformData(filteredPlatforms)
+      : setTopPlatformData(topPlatformItems);
+  }, [togglePlatformItems]);
+
   const toggleProfileMenu = () => {
     const profileMenu = profileMenuRef.current;
     profileMenu.classList.toggle("hideProfileMenu");
@@ -158,20 +254,41 @@ function App() {
     profileMenu.classList.toggle("hideProfileMenu");
   };
 
-  const sideBarRef = useRef(null);
   const toggleSideBar = () => {
     const sidebar = sideBarRef.current;
     sidebar.classList.toggle("hideSidebar");
   };
 
-  const toggleThemeBtn = () => {
-    setIsThemeToggled(!isThemeToggled);
-    console.log(isThemeToggled);
+  // const toggleThemeBtn = () => {
+  //   setIsThemeToggled(!isThemeToggled);
+  //   console.log(isThemeToggled);
+  // };
+
+  const toggleBarChart = (e) => {
+    if (e.target.value === "weekly") {
+      setBarChartData(dataWeekly);
+    }
+
+    if (e.target.value === "monthly") {
+      setBarChartData(dataMonthly);
+    }
   };
 
   return (
-    <div className="App">
-      <div id="sidebar" className="hideSidebar" ref={sideBarRef}>
+    <div
+      className={`App ${
+        isThemeToggled ? "bg-black text-white" : "bg-appBG text-black"
+      }`}
+    >
+      <div
+        id="sidebar"
+        className={`hideSidebar ${
+          isThemeToggled
+            ? "bg-black text-white border-slate-500"
+            : "bg-white lg:bg-appBG border-appBorders text-black"
+        }`}
+        ref={sideBarRef}
+      >
         <div className="flex flex-col  items-center gap-2 mt-9 lg:mt-3">
           <img src={logoIcon} alt="logoIcon" className="logo" />
 
@@ -192,12 +309,20 @@ function App() {
 
           <div className="flex flex-col items-center gap-2 bg-white py-2 px-1 my-5 lg:my-0 rounded-full">
             <img
-              onClick={toggleThemeBtn}
+              onClick={() => {
+                setIsThemeToggled(false);
+                console.log(isThemeToggled);
+              }}
               src={sunnnn}
               alt="sunIcon"
               className="cursor-pointer  hover:scale-125 transition ease-in-out duration-200"
             />
+
             <img
+              onClick={() => {
+                setIsThemeToggled(true);
+                console.log(isThemeToggled);
+              }}
               src={moonIcon}
               alt="moonIcon"
               className="cursor-pointer  hover:scale-125 transition ease-in-out duration-200"
@@ -221,7 +346,9 @@ function App() {
       </div>
 
       <main className="w-full p-4 lg:p-2">
-        <header>
+        <header
+          className={isThemeToggled ? "border-slate-500" : "border-appBorders"}
+        >
           <div className="w-full lg:w-auto flex flex-row justify-between items-center">
             <h1 className="font-semibold text-lg mr-auto">Dashboard</h1>
 
@@ -254,22 +381,17 @@ function App() {
               <img src={bellIcon} alt="bellIcon" />
             </div>
 
-            <div className="profileGrp">
+            <div className="profileGrp" onClick={toggleProfileMenu}>
               <img src={profileImg} alt="justinBergson" />
 
-              <div className="relative">
+              <div className="relative ">
                 <div className="flex flex-row items-center gap-2">
                   <div>
                     <p className="capitalize text-end">{profileName}</p>
                     <p className=" text-slate-400">{profileEmail}</p>
                   </div>
 
-                  <img
-                    src={downIcon}
-                    alt="downIcon"
-                    className="cursor-pointer"
-                    onClick={toggleProfileMenu}
-                  />
+                  <img src={downIcon} alt="downIcon" />
                 </div>
 
                 <div
@@ -319,16 +441,25 @@ function App() {
 
         <div className="flex flex-col gap-5 py-3">
           <section className="salesTrends">
-            <div className="salesGraph">
+            <div
+              className={`salesGraph ${
+                isThemeToggled
+                  ? "bg-slate-950 text-white"
+                  : "bg-white text-black"
+              }`}
+            >
               <div className="flex flex-row justify-between items-center">
                 <h1 className="sectionHeading">Sales Trends</h1>
 
                 <div className="sortingGrp">
                   <p>Sort by:</p>
 
-                  <select className="bg-white border border-slate-950 rounded-full px-3 py-1 cursor-pointer text-sm outline-0">
+                  <select
+                    className="bg-transparent border border-slate-950 rounded-full px-3 py-1 cursor-pointer text-sm outline-0"
+                    onChange={toggleBarChart}
+                  >
+                    <option value="monthly">Monthly</option>
                     <option value="weekly">Weekly</option>
-                    <option value="weekly">Monthly</option>
                   </select>
                 </div>
               </div>
@@ -338,7 +469,7 @@ function App() {
                   className="w-full mt-5"
                   width={600}
                   height={250}
-                  data={data}
+                  data={barChartData}
                   margin={{
                     top: 5,
                     right: 30,
@@ -362,7 +493,13 @@ function App() {
             </div>
 
             <div className="salesChartGrp">
-              <div className="salesChartBody">
+              <div
+                className={`salesChartBody ${
+                  isThemeToggled
+                    ? "bg-slate-950 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
                 <div className="flex flex-row justify-between items-center">
                   <img src={totalOrdersIcon} alt="totalOrdersIcon" />
 
@@ -384,7 +521,13 @@ function App() {
                 </div>
               </div>
 
-              <div className="salesChartBody">
+              <div
+                className={`salesChartBody ${
+                  isThemeToggled
+                    ? "bg-slate-950 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
                 <div className="flex flex-row justify-between items-center">
                   <img src={totalOrdersIcon} alt="totalOrdersIcon" />
 
@@ -406,7 +549,13 @@ function App() {
                 </div>
               </div>
 
-              <div className="salesChartBody">
+              <div
+                className={`salesChartBody ${
+                  isThemeToggled
+                    ? "bg-slate-950 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
                 <div className="flex flex-row justify-between items-center">
                   <img src={totalOrdersIcon} alt="totalOrdersIcon" />
 
@@ -428,7 +577,13 @@ function App() {
                 </div>
               </div>
 
-              <div className="salesChartBody">
+              <div
+                className={`salesChartBody ${
+                  isThemeToggled
+                    ? "bg-slate-950 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
                 <div className="flex flex-row justify-between items-center">
                   <img src={totalOrdersIcon} alt="totalOrdersIcon" />
 
@@ -453,7 +608,13 @@ function App() {
           </section>
 
           <section className="lastOrders">
-            <div className="lastOrdersTable">
+            <div
+              className={`lastOrdersTable ${
+                isThemeToggled
+                  ? "bg-slate-950 text-white"
+                  : "bg-white text-black"
+              }`}
+            >
               <h1 className="sectionHeading">Last Orders</h1>
 
               <div className="overflow-x-scroll md:overflow-x-hidden">
@@ -613,93 +774,48 @@ function App() {
               </div>
             </div>
 
-            <div className="topPlatforms">
+            <div
+              className={`topPlatforms ${
+                isThemeToggled
+                  ? "bg-slate-950 text-white"
+                  : "bg-white text-black"
+              }`}
+            >
               <div className="flex flex-row justify-between items-center">
                 <h1 className="sectionHeading">Top Platform</h1>
-                <p className="text-green-400">See all</p>
+                <p
+                  className="text-green-400 hover:underline cursor-pointer"
+                  onClick={() => {
+                    setTogglePlatformItems(!togglePlatformItems);
+                  }}
+                >
+                  {togglePlatformItems ? "See all" : "Close"}
+                </p>
               </div>
 
               <div className="mt-5 flex flex-col gap-5 ">
-                <div className="platformItem">
-                  <h1 className="platformName">Book Bazaar</h1>
+                {topPlatformData.map((element, index) => (
+                  <div className="platformItem" key={index}>
+                    <h1 className="platformName">{element.name}</h1>
 
-                  <div className="ratingBar">
-                    <motion.div
-                      className="barColor bg-bookBazaar w-2/3"
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: "66.666667%",
-                        transition: { duration: 1 },
-                      }}
-                    ></motion.div>
+                    <div className="ratingBar">
+                      <motion.div
+                        className={`barColor ${element.color} w-2/3`}
+                        initial={{ width: 0 }}
+                        whileInView={{
+                          width: element.width,
+                          transition: { duration: 1 },
+                        }}
+                      ></motion.div>
+                    </div>
+
+                    <div className="platformMoneyGrp">
+                      <p className="platformMoney">{element.money}</p>
+
+                      <p className="platformPercentage">{element.percent}</p>
+                    </div>
                   </div>
-
-                  <div className="platformMoneyGrp">
-                    <p className="platformMoney">$2,500,000</p>
-
-                    <p className="platformPercentage">+15%</p>
-                  </div>
-                </div>
-
-                <div className="platformItem">
-                  <h1 className="platformName">Artisan Aisle</h1>
-
-                  <div className="ratingBar">
-                    <motion.div
-                      className="barColor bg-artisanAisle w-1/2"
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: "50%",
-                        transition: { duration: 1 },
-                      }}
-                    ></motion.div>
-                  </div>
-
-                  <div className="platformMoneyGrp">
-                    <p className="platformMoney">$1,800,000</p>
-                    <p className="platformPercentage">+10%</p>
-                  </div>
-                </div>
-
-                <div className="platformItem">
-                  <h1 className="platformName">Toy Troop</h1>
-
-                  <div className="ratingBar">
-                    <motion.div
-                      className="barColor bg-toyTroop w-1/3"
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: "33.333333%",
-                        transition: { duration: 1 },
-                      }}
-                    ></motion.div>
-                  </div>
-
-                  <div className="platformMoneyGrp">
-                    <p className="platformMoney">$1,200,000</p>
-                    <p className="platformPercentage">+8%</p>
-                  </div>
-                </div>
-
-                <div className="platformItem">
-                  <h1 className="platformName">X Store</h1>
-
-                  <div className="ratingBar">
-                    <motion.div
-                      className="barColor bg-xStore w-2/3"
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: "66.666667%",
-                        transition: { duration: 1 },
-                      }}
-                    ></motion.div>
-                  </div>
-
-                  <div className="platformMoneyGrp">
-                    <p className="platformMoney">$2,500,000</p>
-                    <p className="platformPercentage">+15%</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
