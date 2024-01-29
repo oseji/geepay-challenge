@@ -11,6 +11,7 @@ import {
 import { motion } from "framer-motion";
 
 import mobileMenu from "./assets/mobileMenu.svg";
+import iconClose from "./assets/close.svg";
 import logoIcon from "./assets/logo.svg";
 import squareMenuIcon from "./assets/Square menu.svg";
 import salesIcon from "./assets/sales icon.svg";
@@ -187,6 +188,12 @@ function App() {
   const [profileEmail, setProfileEmail] = useState("Justin@gmail.com");
   const [barChartData, setBarChartData] = useState(dataMonthly);
 
+  const [invoiceName, setInvoiceName] = useState("");
+  const [invoiceAmount, setInvoiceAmount] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
+  const [invoiceStatus, setInvoiceStatus] = useState("");
+
+  const invoiceBoxRef = useRef(null);
   const sideBarRef = useRef(null);
   const profileMenuRef = useRef(null);
 
@@ -257,6 +264,24 @@ function App() {
   const toggleSideBar = () => {
     const sidebar = sideBarRef.current;
     sidebar.classList.toggle("hideSidebar");
+  };
+
+  const toggleInvoice = (e) => {
+    const invoiceBox = invoiceBoxRef.current;
+    invoiceBox.classList.remove("hidden");
+
+    const tr = e.target.closest("tr");
+    if (tr) {
+      const userName = tr.querySelector(".userName").textContent;
+      const amount = tr.querySelector(".amount").textContent;
+      const date = tr.querySelector(".date").textContent;
+      const status = tr.querySelector(".status").textContent;
+
+      setInvoiceName(userName);
+      setInvoiceDate(date);
+      setInvoiceAmount(amount);
+      setInvoiceStatus(status);
+    }
   };
 
   // const toggleThemeBtn = () => {
@@ -617,7 +642,7 @@ function App() {
             >
               <h1 className="sectionHeading">Last Orders</h1>
 
-              <div className="overflow-x-scroll md:overflow-x-hidden">
+              <div className="overflow-x-scroll md:overflow-x-hidden relative">
                 <table className="lastOrdersTableGrp">
                   <thead>
                     <tr>
@@ -634,22 +659,23 @@ function App() {
                       <td>
                         <div className="columnNameGrp">
                           <img src={marcusBergson} alt="avatar" />
-                          <p>Marcus Bergson</p>
+                          <p className="userName">Marcus Bergson</p>
                         </div>
                       </td>
 
                       <td>
-                        <p>Nov 15, 2023</p>
+                        <p className="date">Nov 15, 2023</p>
                       </td>
 
                       <td>
-                        <p>$80,000</p>
+                        <p className="amount">$80,000</p>
                       </td>
 
                       <td>
-                        <p className="text-hoverHighlight">Paid</p>
+                        <p className="text-hoverHighlight status">Paid</p>
                       </td>
-                      <td>
+
+                      <td onClick={toggleInvoice}>
                         <div className="invoiceGrp">
                           <img src={invoiceIcon} alt="invoiceIcon" />
 
@@ -662,22 +688,23 @@ function App() {
                       <td>
                         <div className="columnNameGrp">
                           <img src={jadonVarraco} alt="avatar" />
-                          <p>Jaydon Varraco</p>
+                          <p className="userName">Jaydon Varraco</p>
                         </div>
                       </td>
 
                       <td>
-                        <p>Nov 15, 2023</p>
+                        <p className="date">Nov 15, 2023</p>
                       </td>
 
                       <td>
-                        <p>$150,000</p>
+                        <p className="amount">$150,000</p>
                       </td>
 
                       <td>
-                        <p className="text-red-400">Refund</p>
+                        <p className="text-red-400 status">Refund</p>
                       </td>
-                      <td>
+
+                      <td onClick={toggleInvoice}>
                         <div className="invoiceGrp">
                           <img src={invoiceIcon} alt="invoiceIcon" />
 
@@ -690,22 +717,23 @@ function App() {
                       <td>
                         <div className="columnNameGrp">
                           <img src={coreySchleifer} alt="avatar" />
-                          <p>Corey Schleifer</p>
+                          <p className="userName">Corey Schleifer</p>
                         </div>
                       </td>
 
                       <td>
-                        <p>Nov 14, 2023</p>
+                        <p className="date">Nov 14, 2023</p>
                       </td>
 
                       <td>
-                        <p>$87,000</p>
+                        <p className="amount">$87,000</p>
                       </td>
 
                       <td>
-                        <p className="text-green-400">Paid</p>
+                        <p className="text-green-400 status">Paid</p>
                       </td>
-                      <td>
+
+                      <td onClick={toggleInvoice}>
                         <div className="invoiceGrp">
                           <img src={invoiceIcon} alt="invoiceIcon" />
 
@@ -718,22 +746,23 @@ function App() {
                       <td>
                         <div className="columnNameGrp">
                           <img src={cooperPress} alt="avatar" />
-                          <p>Cooper Press</p>
+                          <p className="userName">Cooper Press</p>
                         </div>
                       </td>
 
                       <td>
-                        <p>Nov 14, 2023</p>
+                        <p className="date">Nov 14, 2023</p>
                       </td>
 
                       <td>
-                        <p>$100,000</p>
+                        <p className="amount">$100,000</p>
                       </td>
 
                       <td>
-                        <p className="text-red-400">Refund</p>
+                        <p className="text-red-400 status">Refund</p>
                       </td>
-                      <td>
+
+                      <td onClick={toggleInvoice}>
                         <div className="invoiceGrp">
                           <img src={invoiceIcon} alt="invoiceIcon" />
 
@@ -746,22 +775,23 @@ function App() {
                       <td>
                         <div className="columnNameGrp">
                           <img src={philipLubin} alt="avatar" />
-                          <p>Philip Lubin</p>
+                          <p className="userName">Philip Lubin</p>
                         </div>
                       </td>
 
                       <td>
-                        <p>Nov 13, 2023</p>
+                        <p className="date">Nov 13, 2023</p>
                       </td>
 
                       <td>
-                        <p>$78,000</p>
+                        <p className="amount">$78,000</p>
                       </td>
 
                       <td>
-                        <p className="text-text-hoverHighlight">Paid</p>
+                        <p className="text-hoverHighlight status">Paid</p>
                       </td>
-                      <td>
+
+                      <td onClick={toggleInvoice}>
                         <div className="invoiceGrp">
                           <img src={invoiceIcon} alt="invoiceIcon" />
 
@@ -771,6 +801,28 @@ function App() {
                     </tr>
                   </tbody>
                 </table>
+
+                <div
+                  ref={invoiceBoxRef}
+                  className={`invoiceBox bg-white text-black hidden ${
+                    isThemeToggled ? "" : " border border-slate-500"
+                  }`}
+                >
+                  <img
+                    src={iconClose}
+                    alt="close icon"
+                    className="block ml-auto h-4 cursor-pointer"
+                    onClick={() => {
+                      invoiceBoxRef.current.classList.add("hidden");
+                    }}
+                  />
+
+                  <p>{invoiceName}</p>
+                  <p className="my-2">{invoiceDate}</p>
+                  <p>
+                    {invoiceAmount} {invoiceStatus}
+                  </p>
+                </div>
               </div>
             </div>
 
