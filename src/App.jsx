@@ -284,11 +284,6 @@ function App() {
     }
   };
 
-  // const toggleThemeBtn = () => {
-  //   setIsThemeToggled(!isThemeToggled);
-  //   console.log(isThemeToggled);
-  // };
-
   const toggleBarChart = (e) => {
     if (e.target.value === "weekly") {
       setBarChartData(dataWeekly);
@@ -817,10 +812,20 @@ function App() {
                     }}
                   />
 
-                  <p>{invoiceName}</p>
-                  <p className="my-2">{invoiceDate}</p>
-                  <p>
-                    {invoiceAmount} {invoiceStatus}
+                  <p className="mb-2">NAME: {invoiceName}</p>
+                  <p className="mb-2">DATE: {invoiceDate}</p>
+                  <p className="mb-2">AMOUNT: {invoiceAmount}</p>
+                  <p className="mb-2">
+                    STATUS:
+                    <span
+                      className={`${
+                        invoiceStatus === "Paid"
+                          ? "text-hoverHighlight"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {invoiceStatus}
+                    </span>
                   </p>
                 </div>
               </div>
