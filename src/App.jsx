@@ -402,12 +402,12 @@ function App() {
             </div>
 
             <div className="profileGrp" onClick={toggleProfileMenu}>
-              <img src={profileImg} alt="justinBergson" />
+              <img className="h-7" src={profileImg} alt="justinBergson" />
 
-              <div className="relative ">
+              <div className="relative">
                 <div className="flex flex-row items-center gap-2">
-                  <div>
-                    <p className="capitalize text-end">{profileName}</p>
+                  <div className="min-w-[130px] text-end">
+                    <p className="capitalize">{profileName}</p>
                     <p className=" text-slate-400">{profileEmail}</p>
                   </div>
 
@@ -812,13 +812,22 @@ function App() {
                     }}
                   />
 
-                  <p className="mb-2">NAME: {invoiceName}</p>
-                  <p className="mb-2">DATE: {invoiceDate}</p>
-                  <p className="mb-2">AMOUNT: {invoiceAmount}</p>
-                  <p className="mb-2">
+                  <p className="my-2 font-bold">
+                    NAME:
+                    <span className="font-light text-sm">{invoiceName}</span>
+                  </p>
+                  <p className="mb-2 font-bold">
+                    DATE:
+                    <span className="font-light text-sm"> {invoiceDate}</span>
+                  </p>
+                  <p className="mb-2 font-bold">
+                    AMOUNT:
+                    <span className="font-light text-sm"> {invoiceAmount}</span>
+                  </p>
+                  <p className="font-bold">
                     STATUS:
                     <span
-                      className={`${
+                      className={`font-light text-sm ${
                         invoiceStatus === "Paid"
                           ? "text-hoverHighlight"
                           : "text-red-500"
